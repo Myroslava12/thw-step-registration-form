@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.css";
+
+.form {
+    max-width: 600px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &-group, .input-group {
+        width: 47%;
+    }
+
+    @media (max-width: 767px) {
+        &-group, .input-group {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.link {
+    width: 40%;
+    margin: 40px 0 0 auto;
+    border-radius: 10px;
+}

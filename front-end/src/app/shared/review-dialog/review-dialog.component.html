@@ -1,0 +1,35 @@
+<div class="modal fade show visible">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="onClose(false)" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Please carefully review the information you have entered</p>
+        <dl class="row">
+          <dt class="col-sm-4">First Name:</dt>
+          <dd class="col-sm-8">{{firtName$ | async}}</dd>
+          <dt class="col-sm-4">Last Name:</dt>
+          <dd class="col-sm-8">{{lastName$ | async}}</dd>
+          <dt class="col-sm-4">Country:</dt>
+          <dd class="col-sm-8">{{country$ | async}}</dd>
+          <dt class="col-sm-4">Phone Number:</dt>
+          <dd class="col-sm-8">{{phoneNumber$ | async}}</dd>
+        </dl>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                (click)="onClose(false)">Cancel</button>
+        <button type="button"
+                class="btn btn-primary"
+                (click)="onSubmit()">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>

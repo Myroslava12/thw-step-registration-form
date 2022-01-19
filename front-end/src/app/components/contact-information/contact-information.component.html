@@ -1,0 +1,58 @@
+
+<div class="container">
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage$ | async">
+    {{errorMessage$ | async}}
+  </div>
+
+  <a class="btn btn-primary contact-link" [routerLink]="['/personal-information']">Back</a>
+
+  <form class="form" [formGroup]="form" (ngSubmit)="onOpenReviewDialog()">
+    <div class="form-group mt-3">
+      <label for="country">Country</label>
+      <select id="country"
+              (ngModelChange)="changeCountry($event)"
+              class="form-select"
+              formControlName="country"
+              [ngClass]="{
+                'is-invalid': (controls['country']?.touched && controls['country']?.errors?.['required'])
+              }">
+        <option value="" code="" selected disabled>Choose your country</option>
+        <option *ngFor="let countryCode of countryCodes$ | async" [ngValue]="countryCode" value="{{countryCode.code}}">{{countryCode.name}}</option>
+      </select>
+    
+      <div class="invalid-feedback" *ngIf="controls['country']?.touched && controls['country']?.errors?.['required']">
+        Country is required.
+      </div>
+    </div>
+    
+    <div class="input-group mt-3">
+      <label for="phoneNumber">Phone Number</label>
+      <span class="input-group-text" id="phoneNumber">{{country ? country.dial_code : null}}</span>
+      <input type="number"
+             class="form-control"
+             id="phoneNumber"
+             aria-describedby="phoneNumber"
+             [ngClass]="{
+               'is-invalid': (controls['phoneNumber']?.touched && 
+                 (controls['phoneNumber']?.errors?.['required'] || form?.errors?.['phoneNumberInvalid']))
+             }"
+             formControlName="phoneNumber">
+    
+      <div class="invalid-feedback" *ngIf="controls['phoneNumber']?.touched && controls['phoneNumber']?.errors?.['required']">
+        Phone number is required.
+      </div>
+
+      <div class="invalid-feedback" *ngIf="controls['phoneNumber']?.touched && form.errors?.['phoneNumberInvalid']">
+        Phone number invalid.
+      </div>
+    </div>
+    
+    <button class="btn btn-primary link" [disabled]="!form.valid" type="click">Continue</button>
+  </form>
+</div>
+
+<app-review-dialog *ngIf="modalIsVisable"
+                   (close)="onCloseReviewDialog($event)"
+                   (submit)="onSubmit()"></app-review-dialog>

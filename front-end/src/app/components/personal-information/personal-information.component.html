@@ -1,0 +1,55 @@
+<div class="container">
+  <form class="form" [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <div class="form-group mt-3">
+      <label for="firstName">First Name</label>
+      <input type="text"
+             class="form-control"
+             id="firstName"
+             [ngClass]="{
+               'is-invalid': (controls['firstName']?.touched && 
+                 (controls['firstName']?.errors?.['required'] || controls['firstName']?.errors?.['pattern'] ||
+                 form.errors?.['isShort']))
+             }"
+             formControlName="firstName">
+    
+      <div class="invalid-feedback" *ngIf="controls['firstName']?.touched && controls['firstName']?.errors?.['required']">
+        First Name is required.
+      </div>
+    
+      <div class="invalid-feedback" *ngIf="controls['firstName']?.touched && controls['firstName']?.errors?.['pattern']">
+        First Name should not contain any numbers.
+      </div>
+    
+      <div class="invalid-feedback" *ngIf="form.invalid && form.errors?.['isShort']">
+        The first and last names cannot be 1 letter long the same time.
+      </div>
+    </div>
+    
+    <div class="form-group mt-3">
+      <label for="lastName">Last Name</label>
+      <input type="text"
+             class="form-control"
+             id="lastName"
+             [ngClass]="{
+               'is-invalid': (controls['lastName']?.touched && 
+                 (controls['lastName']?.errors?.['required'] || controls['lastName']?.errors?.['pattern'] ||
+                 form.errors?.['isShort']))
+             }"
+             formControlName="lastName">
+    
+      <div class="invalid-feedback" *ngIf="controls['lastName']?.touched && controls['lastName']?.errors?.['required']">
+        Last Name is required.
+      </div>
+    
+      <div class="invalid-feedback" *ngIf="controls['lastName']?.touched && controls['lastName']?.errors?.['pattern']">
+        Last Name should not contain any numbers.
+      </div>
+    
+      <div class="invalid-feedback" *ngIf="form.invalid && form.errors?.['isShort']">
+        The first and last names cannot be 1 letter long the same time.
+      </div>
+    </div>
+    
+    <button class="btn btn-primary link" [disabled]="!form.valid" type="submit">Continue</button>
+  </form>
+</div>

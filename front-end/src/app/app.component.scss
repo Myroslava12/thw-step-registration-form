@@ -1,0 +1,22 @@
+.header, .footer {
+    padding: 20px 0;
+    border: 1px solid #000;
+}
+
+.logo {
+    text-decoration: none;
+    color: #000;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
