@@ -10,7 +10,7 @@ export interface RegistrationState {
   phoneNumber: string;
 }
 
-const initialState: RegistrationState = {
+export const initialState: RegistrationState = {
   firstName: '',
   lastName: '',
   country: '',

@@ -9,7 +9,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { RegistrationFacade } from 'src/app/store/registration/registration.facade';
+import { RegistrationFacade } from '../../store/registration/registration.facade';
 
 @Component({
   selector: 'app-personal-information-component',
@@ -24,7 +24,9 @@ export class PersonalInformationComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private registrationFacade: RegistrationFacade) {
     this.firstName$ = this.registrationFacade.firstName$;
     this.lastName$ = this.registrationFacade.lastName$;
+  }
 
+  ngOnInit(): void {
     this.form = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]),
       lastName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')])
@@ -40,8 +42,6 @@ export class PersonalInformationComponent implements OnInit {
       this.form.patchValue({ lastName: val });
     });
   }
-
-  ngOnInit(): void {}
 
   firstAndLastNamesValidator(firstNameControl: string, lastNameControl: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -69,5 +69,4 @@ export class PersonalInformationComponent implements OnInit {
   get controls() {
     return this.form.controls;
   }
-
 }

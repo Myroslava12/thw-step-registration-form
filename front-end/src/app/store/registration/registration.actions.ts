@@ -1,4 +1,4 @@
-import { createAction, props } from "@ngrx/store";
+import { Action, createAction, props } from "@ngrx/store";
 import { ContactInformation, PersonalInformation } from "src/app/interfaces";
 
 export const requestPersonalInformation = createAction(

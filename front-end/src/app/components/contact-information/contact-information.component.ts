@@ -10,9 +10,9 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Country } from 'src/app/interfaces';
-import { CountryCodesFacade } from 'src/app/store/country-codes/country-codes.facade';
 import { PhoneNumberUtil } from 'google-libphonenumber';
-import { RegistrationFacade } from 'src/app/store/registration/registration.facade';
+import { CountryCodesFacade } from '../../store/country-codes/country-codes.facade';
+import { RegistrationFacade } from '../../store/registration/registration.facade';
 
 @Component({
   selector: 'app-contact-information-component',
@@ -35,16 +35,16 @@ export class ContactInformationComponent implements OnInit {
     this.countryCodes$ = this.countryCodesFacade.countryCodes$;
     this.isLoading$ = this.countryCodesFacade.isLoading$;
     this.errorMessage$ = this.countryCodesFacade.errorMessage$;
+  }
 
+  ngOnInit(): void {
     this.form = this.formBuilder.group({
       country: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required])
     }, {
       validator: this.phoneNumberValidation('phoneNumber')
     });
-  }
-
-  ngOnInit(): void {
+  
     this.form.get('country')?.valueChanges.subscribe(val => {
       if (val.length !== 0) {
         this.form.get('phoneNumber')?.enable();
@@ -55,13 +55,13 @@ export class ContactInformationComponent implements OnInit {
       this.form.get('phoneNumber')?.disable();
     }
 
-    this.countryCodesFacade.getCountryCodes();
+    this.getCountryCodes();
   }
 
   phoneNumberValidation(phoneNumberValue: string): ValidatorFn {
     const phoneNumberUtil = PhoneNumberUtil.getInstance();
     let validNumber = false;
-
+    
     return (control: AbstractControl): ValidationErrors | null => {
       if (this.country && `${control.get(phoneNumberValue)?.value}`.length > 1) {
         const phoneNumber = phoneNumberUtil.parse(
@@ -76,13 +76,16 @@ export class ContactInformationComponent implements OnInit {
     }
   }
 
+  getCountryCodes() {
+    this.countryCodesFacade.getCountryCodes();
+  }
+
   changeCountry(country: Country) {
     this.country = country;
   }
 
   onOpenReviewDialog() {
     this.form.markAllAsTouched();
-    console.log(this.form)
 
     if (this.form.invalid) return;
 
@@ -94,7 +97,6 @@ export class ContactInformationComponent implements OnInit {
     this.registrationFacade.postContactInformation(updates);
 
     setTimeout(() => this.modalIsVisable = true);
-    
   }
 
   get controls() {
@@ -102,7 +104,6 @@ export class ContactInformationComponent implements OnInit {
   }
 
   onCloseReviewDialog(value: boolean) {
-    console.log(value)
     this.modalIsVisable = value;
   }
 

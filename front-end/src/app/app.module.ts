@@ -4,7 +4,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
-import { RegistrationButtonComponent } from './components/registration-button/registration-button.component';
+import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
@@ -20,7 +20,7 @@ import { CountryCodesModule } from './country-codes/country-codes.module';
   declarations: [
     AppComponent,
     PersonalInformationComponent,
-    RegistrationButtonComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

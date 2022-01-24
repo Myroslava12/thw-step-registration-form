@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
-import { RegistrationButtonComponent } from './components/registration-button/registration-button.component';
+import { HomeComponent } from './components/home/home.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
-    component: RegistrationButtonComponent
+    component: HomeComponent
   },
   {
     path: 'personal-information',

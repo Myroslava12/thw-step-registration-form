@@ -8,7 +8,7 @@ import * as RegistrationActions from './registration.actions';
 @Injectable()
 export class RegistrationEffects{
   @Effect({ dispatch: true })
-  postPersonalInfo: Observable<Action> = this.actions$.pipe(
+  postPersonalInfo$: Observable<Action> = this.actions$.pipe(
     ofType(RegistrationActions.requestPersonalInformation),
     map((data) => {
       return RegistrationActions.successPersonalInformation(data);
@@ -16,7 +16,7 @@ export class RegistrationEffects{
   );
 
   @Effect({dispatch: true})
-  postContactInfo: Observable<Action> = this.actions$.pipe(
+  postContactInfo$: Observable<Action> = this.actions$.pipe(
     ofType(RegistrationActions.requestContactInformation),
     map((data) => {
       return RegistrationActions.successContactInformation(data);

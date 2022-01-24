@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RegistrationFacade } from 'src/app/store/registration/registration.facade';
+import { RegistrationFacade } from '../../store/registration/registration.facade';
 
 @Component({
   selector: 'app-review-dialog',
