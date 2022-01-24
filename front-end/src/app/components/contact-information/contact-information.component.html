@@ -12,14 +12,14 @@
     <div class="form-group mt-3">
       <label for="country">Country</label>
       <select id="country"
-              (ngModelChange)="changeCountry($event)"
+              (change)="changeCountry($event)"
               class="form-select"
               formControlName="country"
               [ngClass]="{
                 'is-invalid': (controls['country']?.touched && controls['country']?.errors?.['required'])
               }">
-        <option value="" code="" selected disabled>Choose your country</option>
-        <option *ngFor="let countryCode of countryCodes$ | async" [ngValue]="countryCode" value="{{countryCode.code}}">{{countryCode.name}}</option>
+        <option value="" code="" [attr.data-country]="''" selected disabled>Choose your country</option>
+        <option *ngFor="let countryCode of countryCodes$ | async"  [attr.data-country]="countryCode.dial_code" value="{{countryCode.code}}">{{countryCode.name}}</option>
       </select>
     
       <div class="invalid-feedback" *ngIf="controls['country']?.touched && controls['country']?.errors?.['required']">
@@ -29,7 +29,7 @@
     
     <div class="input-group mt-3">
       <label for="phoneNumber">Phone Number</label>
-      <span class="input-group-text" id="phoneNumber">{{country ? country.dial_code : null}}</span>
+      <span class="input-group-text dial_code">{{countryDialCode ? countryDialCode : null}}</span>
       <input type="number"
              class="form-control"
              id="phoneNumber"

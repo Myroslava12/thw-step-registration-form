@@ -27,8 +27,9 @@
     ],
     "types": [
       "jest",
-      "node"
-    ],
+      "node",
+      "cypress"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

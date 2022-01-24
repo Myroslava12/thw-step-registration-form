@@ -9,10 +9,13 @@ import {
   Validators
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Country } from 'src/app/interfaces';
+import { Country } from '../../interfaces';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import { CountryCodesFacade } from '../../store/country-codes/country-codes.facade';
 import { RegistrationFacade } from '../../store/registration/registration.facade';
+import { Router } from '@angular/router';
+import { reducers } from 'src/app/store';
+import { RegistrationState } from 'src/app/store/registration/registration.reducer';
 
 @Component({
   selector: 'app-contact-information-component',
@@ -23,18 +26,21 @@ export class ContactInformationComponent implements OnInit {
   modalIsVisable: boolean = false;
   form: FormGroup;
   countryCodes$: Observable<Country[]>;
-  country: Country;
+  countryDialCode: string;
   isLoading$: Observable<boolean>;
   errorMessage$: Observable<string | null>;
+  registrationData$: Observable<RegistrationState>;
 
   constructor(
     private formBuilder: FormBuilder,
     private countryCodesFacade: CountryCodesFacade,
-    private registrationFacade: RegistrationFacade) 
+    private registrationFacade: RegistrationFacade,
+    private router: Router) 
   {
     this.countryCodes$ = this.countryCodesFacade.countryCodes$;
     this.isLoading$ = this.countryCodesFacade.isLoading$;
     this.errorMessage$ = this.countryCodesFacade.errorMessage$;
+    this.registrationData$ = this.registrationFacade.registrationData$;
   }
 
   ngOnInit(): void {
@@ -63,10 +69,11 @@ export class ContactInformationComponent implements OnInit {
     let validNumber = false;
     
     return (control: AbstractControl): ValidationErrors | null => {
-      if (this.country && `${control.get(phoneNumberValue)?.value}`.length > 1) {
+      if (this.countryDialCode && `${control.get(phoneNumberValue)?.value}`.length > 1) {
         const phoneNumber = phoneNumberUtil.parse(
-          `${control.get(phoneNumberValue)?.value}`, this.country.code
+          `${control.get(phoneNumberValue)?.value}`, this.form.get('country')?.value
         );
+
         validNumber = phoneNumberUtil.isValidNumber(phoneNumber);
 
         return validNumber ? null : { 'phoneNumberInvalid': true };
@@ -80,10 +87,6 @@ export class ContactInformationComponent implements OnInit {
     this.countryCodesFacade.getCountryCodes();
   }
 
-  changeCountry(country: Country) {
-    this.country = country;
-  }
-
   onOpenReviewDialog() {
     this.form.markAllAsTouched();
 
@@ -91,9 +94,10 @@ export class ContactInformationComponent implements OnInit {
 
     const value = this.form.value;
     const updates = {
-      country: value.country.code,
-      phoneNumber: `${this.country.dial_code} ${value.phoneNumber}`
+      ...value,
+      phoneNumber: `${this.countryDialCode} ${value.phoneNumber}`
     }
+
     this.registrationFacade.postContactInformation(updates);
 
     setTimeout(() => this.modalIsVisable = true);
@@ -107,7 +111,15 @@ export class ContactInformationComponent implements OnInit {
     this.modalIsVisable = value;
   }
 
+  changeCountry(e: any) {
+    this.countryDialCode = e.target.selectedOptions[0].dataset.country;
+  }
+
   onSubmit() {
-    console.log(this.form.value);
+    this.registrationData$.subscribe((result) => {
+      console.log(result);
+    });
+    
+    this.router.navigate(['/']);
   }
 }

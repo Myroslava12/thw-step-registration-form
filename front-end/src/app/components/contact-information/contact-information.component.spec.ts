@@ -75,11 +75,7 @@ describe('ContactInformationComponent', () => {
     component.form.get('country')?.setValue('PL');
 
     expect(phoneNumber?.hasError('required').valueOf()).toBeTruthy();
-    component.country = {
-      name: "Poland",
-      code: "PL",
-      dial_code: "+48"
-    }
+    component.countryDialCode = '+48'
 
     phoneNumber?.setValue('9877899878');
 
@@ -88,11 +84,7 @@ describe('ContactInformationComponent', () => {
 
   it('Phone number should have an error than phone number is invalid', async(() => {
     const phoneNumber = component.form.get('phoneNumber');
-    component.country = {
-      name: "Poland",
-      code: "PL",
-      dial_code: "+48"
-    }
+    component.countryDialCode = "+48"
 
     phoneNumber?.setValue('89789789');
     expect(component.form.hasError('phoneNumberInvalid').valueOf()).toBeTruthy();
@@ -102,12 +94,9 @@ describe('ContactInformationComponent', () => {
   }));
 
   it('Should display review modal', async () => {
-    component.country = {
-      name: "Poland",
-      code: "PL",
-      dial_code: "+48"
-    }
-    component.form.get('country')?.setValue(component.country)
+    component.countryDialCode = "+48";
+
+    component.form.get('country')?.setValue(component.countryDialCode)
     component.form.get('phoneNumber')?.setValue('897897897');
 
     try {

@@ -7,7 +7,7 @@ import {
   } from "@angular/platform-browser-dynamic/testing";
 import { State } from '../../store';
 import { TestBed } from '@angular/core/testing';
-import { getCountry, getFirstName, getLastName, getPhoneNumber } from './registration.selectors';
+import { getCountry, getFirstName, getLastName, getPhoneNumber, getRegistrationData } from './registration.selectors';
 
 describe('Registration Selectors', () => {
   let storeState: State;
@@ -55,6 +55,12 @@ describe('Registration Selectors', () => {
       const result = getPhoneNumber(storeState);
    
       expect(result).toBe('+48777888777');
+    });
+
+    it('getRegistrationData() should return registration values', () => {
+      const result = getRegistrationData(storeState);
+   
+      expect(result).toBe(storeState.registration);
     });
   });
 });

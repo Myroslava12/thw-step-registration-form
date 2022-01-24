@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { ContactInformation, PersonalInformation } from "src/app/interfaces";
 import { State } from "..";
 import { requestContactInformation, requestPersonalInformation } from "./registration.actions";
+import { RegistrationState } from "./registration.reducer";
 import * as RegistrationSelectors from './registration.selectors';
 
 @Injectable({
@@ -14,12 +15,14 @@ export class RegistrationFacade {
   lastName$: Observable<string>;
   country$: Observable<string>;
   phoneNumber$: Observable<string>;
+  registrationData$: Observable<RegistrationState>;
 
   constructor(private store: Store<State>) {
     this.firstName$ = this.store.pipe(select(RegistrationSelectors.getFirstName));
     this.lastName$ = this.store.pipe(select(RegistrationSelectors.getLastName));
     this.country$ = this.store.pipe(select(RegistrationSelectors.getCountry));
     this.phoneNumber$ = this.store.pipe(select(RegistrationSelectors.getPhoneNumber));
+    this.registrationData$ = this.store.pipe(select(RegistrationSelectors.getRegistrationData));
   }
 
   postPersonalInformation(personalData: PersonalInformation): void {
