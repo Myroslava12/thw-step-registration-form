@@ -14,7 +14,6 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 import { CountryCodesFacade } from '../../store/country-codes/country-codes.facade';
 import { RegistrationFacade } from '../../store/registration/registration.facade';
 import { Router } from '@angular/router';
-import { reducers } from 'src/app/store';
 import { RegistrationState } from 'src/app/store/registration/registration.reducer';
 
 @Component({
@@ -26,7 +25,7 @@ export class ContactInformationComponent implements OnInit {
   modalIsVisable: boolean = false;
   form: FormGroup;
   countryCodes$: Observable<Country[]>;
-  countryDialCode: string;
+  country: Country;
   isLoading$: Observable<boolean>;
   errorMessage$: Observable<string | null>;
   registrationData$: Observable<RegistrationState>;
@@ -62,6 +61,10 @@ export class ContactInformationComponent implements OnInit {
     }
 
     this.getCountryCodes();
+
+    this.form.get('phoneNumber')?.valueChanges.subscribe(val => {
+      console.log(this.form)
+    });
   }
 
   phoneNumberValidation(phoneNumberValue: string): ValidatorFn {
@@ -69,9 +72,9 @@ export class ContactInformationComponent implements OnInit {
     let validNumber = false;
     
     return (control: AbstractControl): ValidationErrors | null => {
-      if (this.countryDialCode && `${control.get(phoneNumberValue)?.value}`.length > 1) {
+      if (this.country && `${control.get(phoneNumberValue)?.value}`.length > 1) {
         const phoneNumber = phoneNumberUtil.parse(
-          `${control.get(phoneNumberValue)?.value}`, this.form.get('country')?.value
+          `${control.get(phoneNumberValue)?.value}`, this.country.code
         );
 
         validNumber = phoneNumberUtil.isValidNumber(phoneNumber);
@@ -94,8 +97,8 @@ export class ContactInformationComponent implements OnInit {
 
     const value = this.form.value;
     const updates = {
-      ...value,
-      phoneNumber: `${this.countryDialCode} ${value.phoneNumber}`
+      phoneNumber: `${this.country.dial_code} ${value.phoneNumber}`,
+      country: this.country.code
     }
 
     this.registrationFacade.postContactInformation(updates);
@@ -111,15 +114,15 @@ export class ContactInformationComponent implements OnInit {
     this.modalIsVisable = value;
   }
 
-  changeCountry(e: any) {
-    this.countryDialCode = e.target.selectedOptions[0].dataset.country;
+  changeCountry(country: Country) {
+    this.country = country;
   }
 
   onSubmit() {
     this.registrationData$.subscribe((result) => {
       console.log(result);
     });
-    
+
     this.router.navigate(['/']);
   }
 }
