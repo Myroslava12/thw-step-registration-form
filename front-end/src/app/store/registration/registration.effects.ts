@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { Actions, Effect, ofType } from "@ngrx/effects";
-import { Action } from "@ngrx/store";
-import { map, Observable, tap } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
+import { map, Observable, tap } from 'rxjs';
 import * as RegistrationActions from './registration.actions';
 
 @Injectable()

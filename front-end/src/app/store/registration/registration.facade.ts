@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { ContactInformation, PersonalInformation } from "src/app/interfaces";
-import { State } from "..";
-import { requestContactInformation, requestPersonalInformation } from "./registration.actions";
-import { RegistrationState } from "./registration.reducer";
+import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { ContactInformation, PersonalInformation } from 'src/app/interfaces';
+import { State } from '..';
+import { requestContactInformation, requestPersonalInformation } from './registration.actions';
+import { RegistrationState } from './registration.reducer';
 import * as RegistrationSelectors from './registration.selectors';
 
 @Injectable({

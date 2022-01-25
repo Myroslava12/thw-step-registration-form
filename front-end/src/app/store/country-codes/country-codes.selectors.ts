@@ -1,6 +1,6 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { State } from "..";
-import { CountryCodesFeatureKey, CountryCodesState } from "./country-codes.reducer";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { State } from '..';
+import { CountryCodesFeatureKey, CountryCodesState } from './country-codes.reducer';
 
 export const selectFeature = createFeatureSelector<State, CountryCodesState>(CountryCodesFeatureKey);
 

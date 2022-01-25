@@ -1,8 +1,8 @@
-import { ActionReducerMap } from "@ngrx/store";
-import { CountryCodesEffects } from "./country-codes/country-codes.effects";
-import { CountryCodesFeatureKey, countryCodesReducer, CountryCodesState } from "./country-codes/country-codes.reducer";
-import { RegistrationEffects } from "./registration/registration.effects";
-import { registrationFeatureKey, registrationReducer, RegistrationState } from "./registration/registration.reducer";
+import { ActionReducerMap } from '@ngrx/store';
+import { CountryCodesEffects } from './country-codes/country-codes.effects';
+import { CountryCodesFeatureKey, countryCodesReducer, CountryCodesState } from './country-codes/country-codes.reducer';
+import { RegistrationEffects } from './registration/registration.effects';
+import { registrationFeatureKey, registrationReducer, RegistrationState } from './registration/registration.reducer';
 
 
 export interface State {

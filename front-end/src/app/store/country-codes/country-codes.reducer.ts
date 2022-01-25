@@ -1,5 +1,5 @@
-import { Action, createReducer, on } from "@ngrx/store";
-import { Country } from "src/app/interfaces";
+import { Action, createReducer, on } from '@ngrx/store';
+import { Country } from 'src/app/interfaces';
 import * as CountryCodesActions from './country-codes.actions';
 
 export const CountryCodesFeatureKey = 'country-codes';

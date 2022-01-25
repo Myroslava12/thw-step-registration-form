@@ -1,11 +1,11 @@
 import 'zone.js';
 import 'zone.js/testing';
-import "@angular/compiler"
+import '@angular/compiler'
 import {provideMockActions } from '@ngrx/effects/testing';
 import {
     BrowserDynamicTestingModule,
     platformBrowserDynamicTesting
-  } from "@angular/platform-browser-dynamic/testing";
+  } from '@angular/platform-browser-dynamic/testing';
 import { Action } from '@ngrx/store';
 import { async, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';

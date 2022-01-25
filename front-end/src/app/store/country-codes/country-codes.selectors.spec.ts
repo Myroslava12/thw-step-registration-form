@@ -1,10 +1,10 @@
 import 'zone.js';
 import 'zone.js/testing';
-import "@angular/compiler"
+import '@angular/compiler'
 import {
     BrowserDynamicTestingModule,
     platformBrowserDynamicTesting
-  } from "@angular/platform-browser-dynamic/testing";
+  } from '@angular/platform-browser-dynamic/testing';
 import { State } from '../../store';
 import { TestBed } from '@angular/core/testing';
 import { getCountryCodes, isLoading, errorMessage } from './country-codes.selectors';
@@ -24,7 +24,7 @@ describe('Registration Selectors', () => {
         country: 'PL',
         phoneNumber: '+48777888777'
       },
-      "country-codes": {
+      'country-codes': {
         countryCodes: [{
           name: 'Poland',
           dial_code: '+48',

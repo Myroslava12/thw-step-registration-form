@@ -1,6 +1,6 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Country } from "../../interfaces";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Country } from '../../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class CountryCodesService {

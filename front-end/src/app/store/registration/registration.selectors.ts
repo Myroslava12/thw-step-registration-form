@@ -1,6 +1,6 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { State } from "../index";
-import { registrationFeatureKey, RegistrationState } from "./registration.reducer";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { State } from '../index';
+import { registrationFeatureKey, RegistrationState } from './registration.reducer';
 
 export const selectFeature = createFeatureSelector<State, RegistrationState>(registrationFeatureKey);
 

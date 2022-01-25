@@ -1,5 +1,5 @@
-import { createAction, props } from "@ngrx/store";
-import { Country } from "src/app/interfaces";
+import { createAction, props } from '@ngrx/store';
+import { Country } from 'src/app/interfaces';
 
 
 export const requestCountryCodes = createAction(

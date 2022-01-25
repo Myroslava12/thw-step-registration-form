@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap } from "rxjs";
-import { CountryCodesStoreService } from "../../country-codes/service/country-codes-store.service";
-import { Country } from "src/app/interfaces";
+import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { CountryCodesStoreService } from '../../country-codes/service/country-codes-store.service';
+import { Country } from 'src/app/interfaces';
 import * as CountryCodesActions from './country-codes.actions';
 
 @Injectable()

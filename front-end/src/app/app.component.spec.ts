@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
-} from "@angular/platform-browser-dynamic/testing";
+} from '@angular/platform-browser-dynamic/testing';
 import { RouterModule } from '@angular/router';
 
 describe('AppComponent', () => {

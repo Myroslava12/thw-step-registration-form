@@ -1,11 +1,11 @@
 import 'zone.js';
 import 'zone.js/testing';
-import "@angular/compiler"
+import '@angular/compiler'
 import {provideMockActions, } from '@ngrx/effects/testing';
 import {
     BrowserDynamicTestingModule,
     platformBrowserDynamicTesting
-  } from "@angular/platform-browser-dynamic/testing";
+  } from '@angular/platform-browser-dynamic/testing';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../store';
 import { countryCodesReducer, CountryCodesState } from './country-codes.reducer';

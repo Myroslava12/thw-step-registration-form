@@ -1,6 +1,6 @@
 import 'zone.js';
 import 'zone.js/testing';
-import "@angular/compiler"
+import '@angular/compiler'
 import {provideMockActions } from '@ngrx/effects/testing';
 import {
     BrowserDynamicTestingModule,
