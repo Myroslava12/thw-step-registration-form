@@ -14,6 +14,7 @@ import { ContactInformationComponent } from './contact-information.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../store';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ContactInformationComponent', () => {
   let component: ContactInformationComponent;
@@ -24,7 +25,7 @@ describe('ContactInformationComponent', () => {
   });
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot(reducers), ReactiveFormsModule, FormsModule],
+      imports: [ReactiveFormsModule, FormsModule, StoreModule.forRoot(reducers), RouterTestingModule],
       declarations: [ ContactInformationComponent ],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [CountryCodesFacade, RegistrationFacade]
@@ -75,29 +76,46 @@ describe('ContactInformationComponent', () => {
     component.form.get('country')?.setValue('PL');
 
     expect(phoneNumber?.hasError('required').valueOf()).toBeTruthy();
-    component.countryDialCode = '+48'
+    component.country = {
+      name: 'Poland',
+      dial_code: '+48',
+      code: 'PL'
+    }
 
-    phoneNumber?.setValue('9877899878');
+    phoneNumber?.setValue(9877899878);
 
     expect(phoneNumber?.hasError('required').valueOf()).toBeFalsy();
   }));
 
   it('Phone number should have an error than phone number is invalid', async(() => {
-    const phoneNumber = component.form.get('phoneNumber');
-    component.countryDialCode = "+48"
-
-    phoneNumber?.setValue('89789789');
-    expect(component.form.hasError('phoneNumberInvalid').valueOf()).toBeTruthy();
+    const countryValue = {
+      name: 'Poland',
+      dial_code: '+48',
+      code: 'PL'
+    };
     
-    phoneNumber?.setValue('897897897');
+    component.form.get('country')?.setValue(countryValue);
+    component.form.get('phoneNumber')?.setValue(9089089);
+    fixture.detectChanges();
+    console.log(component.form)
+    expect(component.form.hasError('phoneNumberInvalid').valueOf()).toBeTruthy();
+
+    
+    component.form.get('phoneNumber')?.setValue(897897897);
     expect(component.form.errors).toBeNull();
   }));
 
   it('Should display review modal', async () => {
-    component.countryDialCode = "+48";
+    const countryValue = {
+      name: 'Poland',
+      dial_code: '+48',
+      code: 'PL'
+    };
 
-    component.form.get('country')?.setValue(component.countryDialCode)
-    component.form.get('phoneNumber')?.setValue('897897897');
+    component.country = countryValue;
+
+    component.form.get('country')?.setValue(countryValue)
+    component.form.get('phoneNumber')?.setValue(897897897);
 
     try {
       await component.onOpenReviewDialog();

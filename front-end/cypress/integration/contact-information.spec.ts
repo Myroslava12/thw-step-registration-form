@@ -24,7 +24,7 @@ describe('ContactInformationComponent', () => {
 
   it('PhoneNumber input should be enabled when country input is not empty', () => {
     cy.get('#country')
-      .select('PL')
+      .select('Poland')
       .get('#phoneNumber')
       .should('not.have.attr', 'disabled');
   });
