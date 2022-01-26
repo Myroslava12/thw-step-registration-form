@@ -25,7 +25,7 @@
                 'is-invalid': (controls['country']?.touched && controls['country']?.errors?.['required'])
               }">
         <option value="" code="" [attr.data-country]="''" selected disabled>{{ (contents$ | async).country }}</option>
-        <option *ngFor="let countryCode of countryCodes$ | async"  [attr.data-country]="countryCode.dial_code" [ngValue]="countryCode">{{countryCode.name}}</option>
+        <option *ngFor="let countryCode of countryCodes$ | async"  [attr.data-country]="countryCode.dial_code" [ngValue]="countryCode.code">{{countryCode.name}}</option>
       </select>
     
       <div class="invalid-feedback" *ngIf="controls['country']?.touched && controls['country']?.errors?.['required']">
@@ -35,7 +35,7 @@
     
     <div class="input-group mt-3">
       <label for="phoneNumber">{{ (contents$ | async).phoneNumber }}</label>
-      <span class="input-group-text dial_code">{{country ? country.dial_code : null}}</span>
+      <span class="input-group-text dial_code">{{countryDialCode ? countryDialCode : null}}</span>
       <input type="number"
              class="form-control"
              id="phoneNumber"

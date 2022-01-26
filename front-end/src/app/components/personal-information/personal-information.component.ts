@@ -58,8 +58,6 @@ export class PersonalInformationComponent implements OnInit {
       if (!result) {
         this.contentFacade.getPersonalInfoContents();
       }
-
-      console.log(result);
     });
   }
 
