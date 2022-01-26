@@ -32,6 +32,11 @@ describe('Registration Selectors', () => {
         }],
         isLoading: false,
         errorMessage: null
+      },
+      contents: {
+        contents: null,
+        isLoading: false,
+        errorMessage: null
       }
     }
   });

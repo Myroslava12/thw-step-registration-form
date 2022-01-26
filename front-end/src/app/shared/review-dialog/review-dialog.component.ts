@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RegistrationFacade } from '../../store/registration/registration.facade';
 
@@ -12,6 +12,7 @@ export class ReviewDialogComponent implements OnInit {
   lastName$: Observable<string>;
   country$: Observable<string>;
   phoneNumber$: Observable<string>;
+  @Input() contents: any;
 
   @Output() close = new EventEmitter();
   @Output() submit =new EventEmitter();

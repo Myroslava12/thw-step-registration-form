@@ -1,0 +1,10 @@
+{
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "button": "Continue",
+  "firstNameIsRequired": "First Name is required.",
+  "firstNameShouldNotContainAnyNum": "First Name should not contain any numbers.",
+  "firstAndLastNamesCannotBe1Letter": "The first and last names cannot be 1 letter long the same time.",
+  "lastNameIsRequired": "Last Name is required.",
+  "lastNameShouldNotContainAnyNum": "Last Name should not contain any numbers."
+}

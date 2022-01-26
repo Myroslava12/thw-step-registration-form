@@ -14,8 +14,8 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 import { CountryCodesFacade } from '../../store/country-codes/country-codes.facade';
 import { RegistrationFacade } from '../../store/registration/registration.facade';
 import { Router } from '@angular/router';
-import { reducers } from 'src/app/store';
 import { RegistrationState } from 'src/app/store/registration/registration.reducer';
+import { ContentFacade } from 'src/app/store/content/content.facade';
 
 @Component({
   selector: 'app-contact-information-component',
@@ -30,17 +30,24 @@ export class ContactInformationComponent implements OnInit {
   isLoading$: Observable<boolean>;
   errorMessage$: Observable<string | null>;
   registrationData$: Observable<RegistrationState>;
+  contents$: Observable<any>;
+  contentsIsLoading$: Observable<boolean>;
+  contentsErrorMessage$: Observable<string | null>;
 
   constructor(
     private formBuilder: FormBuilder,
     private countryCodesFacade: CountryCodesFacade,
     private registrationFacade: RegistrationFacade,
-    private router: Router) 
+    private router: Router,
+    private contentFacade: ContentFacade) 
   {
     this.countryCodes$ = this.countryCodesFacade.countryCodes$;
     this.isLoading$ = this.countryCodesFacade.isLoading$;
     this.errorMessage$ = this.countryCodesFacade.errorMessage$;
     this.registrationData$ = this.registrationFacade.registrationData$;
+    this.contents$ = this.contentFacade.contactInfoContents$;
+    this.contentsIsLoading$ = this.contentFacade.isLoading$;
+    this.contentsErrorMessage$ = this.contentFacade.errorMessage$;
   }
 
   ngOnInit(): void {
@@ -62,6 +69,12 @@ export class ContactInformationComponent implements OnInit {
     }
 
     this.getCountryCodes();
+
+    this.contents$.subscribe(result => {
+      if (!result) {
+        this.contentFacade.getContactInfoContents();
+      }
+    });
   }
 
   phoneNumberValidation(phoneNumberValue: string): ValidatorFn {

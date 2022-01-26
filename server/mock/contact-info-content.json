@@ -1,0 +1,15 @@
+{
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "country": "Country",
+  "phoneNumber": "Phone Number",
+  "button": "Continue",
+  "back": "Back",
+  "chooseCountry": "Choose your country",
+  "cancel": "Cancel",
+  "review": "Review",
+  "reviewMessage": "Please carefully review the information you have entered",
+  "countryIsRequired": "Country is required.",
+  "phoneNumberIsRequired": " Phone number is required.",
+  "phoneNumberInvalid": "Phone number invalid."
+}

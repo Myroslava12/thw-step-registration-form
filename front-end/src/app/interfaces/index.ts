@@ -14,3 +14,9 @@ export interface ContactInformation {
   phoneNumber: string;
 }
 
+export interface Content {}
+
+export interface ContentResponse {
+  content: Content;
+}
+

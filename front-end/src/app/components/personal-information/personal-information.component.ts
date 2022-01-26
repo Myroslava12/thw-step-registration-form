@@ -9,6 +9,8 @@ import {
   Validators
 } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Content } from 'src/app/interfaces';
+import { ContentFacade } from 'src/app/store/content/content.facade';
 import { RegistrationFacade } from '../../store/registration/registration.facade';
 
 @Component({
@@ -20,10 +22,20 @@ export class PersonalInformationComponent implements OnInit {
   form: FormGroup;
   firstName$: Observable<string>;
   lastName$: Observable<string>;
+  contents$ : Observable<any>;
+  isLoading$: Observable<boolean>;
+  errorMessage$: Observable<string | null>;
 
-  constructor(private formBuilder: FormBuilder, private registrationFacade: RegistrationFacade) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private registrationFacade: RegistrationFacade,
+    private contentFacade: ContentFacade
+  ) {
     this.firstName$ = this.registrationFacade.firstName$;
     this.lastName$ = this.registrationFacade.lastName$;
+    this.contents$ = this.contentFacade.personalInfoContents$;
+    this.isLoading$ = this.contentFacade.isLoading$;
+    this.errorMessage$ = this.contentFacade.errorMessage$;
   }
 
   ngOnInit(): void {
@@ -40,6 +52,14 @@ export class PersonalInformationComponent implements OnInit {
 
     this.lastName$.subscribe((val) => {
       this.form.patchValue({ lastName: val });
+    });
+
+    this.contents$.subscribe(result => {
+      if (!result) {
+        this.contentFacade.getPersonalInfoContents();
+      }
+
+      console.log(result);
     });
   }
 

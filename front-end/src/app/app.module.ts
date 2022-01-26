@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects, reducers } from './store';
 import { CountryCodesModule } from './country-codes/country-codes.module';
+import { ContentModule } from './content/content.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CountryCodesModule } from './country-codes/country-codes.module';
     HttpClientModule,
     CommonModule,
     CountryCodesModule,
+    ContentModule,
     EffectsModule.forRoot(effects),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({

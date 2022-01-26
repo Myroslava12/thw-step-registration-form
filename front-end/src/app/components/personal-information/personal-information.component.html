@@ -1,7 +1,13 @@
 <div class="container">
-  <form class="form" [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage$ | async">
+    {{errorMessage$ | async}}
+  </div>
+
+  <form class="form" [formGroup]="form" (ngSubmit)="handleSubmit()" *ngIf="contents$ | async">
     <div class="form-group mt-3">
-      <label for="firstName">First Name</label>
+      <label for="firstName">{{ (contents$ | async).firstName }}</label>
       <input type="text"
              class="form-control"
              id="firstName"
@@ -13,20 +19,20 @@
              formControlName="firstName">
     
       <div class="invalid-feedback" *ngIf="controls['firstName']?.touched && controls['firstName']?.errors?.['required']">
-        First Name is required.
+        {{ (contents$ | async).firstNameIsRequired }}
       </div>
     
       <div class="invalid-feedback" *ngIf="controls['firstName']?.touched && controls['firstName']?.errors?.['pattern']">
-        First Name should not contain any numbers.
+        {{ (contents$ | async).firstNameShouldNotContainAnyNum }}
       </div>
     
       <div class="invalid-feedback" *ngIf="form.invalid && form.errors?.['isShort']">
-        The first and last names cannot be 1 letter long the same time.
+        {{ (contents$ | async).firstAndLastNamesCannotBe1Letter }}
       </div>
     </div>
     
     <div class="form-group mt-3">
-      <label for="lastName">Last Name</label>
+      <label for="lastName">{{ (contents$ | async).lastName }}</label>
       <input type="text"
              class="form-control"
              id="lastName"
@@ -38,18 +44,18 @@
              formControlName="lastName">
     
       <div class="invalid-feedback" *ngIf="controls['lastName']?.touched && controls['lastName']?.errors?.['required']">
-        Last Name is required.
+        {{ (contents$ | async).lastNameIsRequired }}
       </div>
     
       <div class="invalid-feedback" *ngIf="controls['lastName']?.touched && controls['lastName']?.errors?.['pattern']">
-        Last Name should not contain any numbers.
+        {{ (contents$ | async).lastNameShouldNotContainAnyNum }}
       </div>
     
       <div class="invalid-feedback" *ngIf="form.invalid && form.errors?.['isShort']">
-        The first and last names cannot be 1 letter long the same time.
+        {{ (contents$ | async).firstAndLastNamesCannotBe1Letter }}
       </div>
     </div>
     
-    <button class="btn btn-primary link" [disabled]="!form.valid" type="submit">Continue</button>
+    <button class="btn btn-primary link" [disabled]="!form.valid" type="submit">{{ (contents$ | async).button }}</button>
   </form>
 </div>

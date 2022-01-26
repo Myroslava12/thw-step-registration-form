@@ -28,6 +28,11 @@ describe('Registration Selectors', () => {
         countryCodes: [],
         isLoading: false,
         errorMessage: null
+      },
+      contents: {
+        contents: null,
+        isLoading: false,
+        errorMessage: null
       }
     }
   });
